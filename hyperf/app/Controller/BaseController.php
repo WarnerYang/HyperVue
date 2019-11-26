@@ -8,6 +8,7 @@ use Hyperf\Di\Annotation\Inject;
 use App\Service\SystemConfigService;
 use App\Service\UserService;
 use App\Request\LoginRequest;
+use App\Request\ChangePwdRequest;
 
 class BaseController extends AbstractController
 {
@@ -28,7 +29,7 @@ class BaseController extends AbstractController
         $data = $this->systemConfigService->getDataList();
         return success($data);
     }
-    
+
     public function login(LoginRequest $request)
     {
         $validated = $request->validated();
@@ -55,6 +56,16 @@ class BaseController extends AbstractController
         $authkey = $this->request->header('authkey');
         $data = $this->userService->removeLoggedInfo($authkey);
         return success();
+    }
+
+    public function changePwd(ChangePwdRequest $request)
+    {
+        $validated = $request->validated();
+        $oldPwd = $this->request->input('old_pwd');
+        $newPwd = $this->request->input('new_pwd');
+        $authKey = $this->request->header('authKey');
+        $data = $this->userService->changePwd($authKey, $oldPwd, $newPwd);
+        return success($data);
     }
 
     public function getVerify()

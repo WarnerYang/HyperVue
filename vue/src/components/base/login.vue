@@ -2,7 +2,7 @@
   <div>
     <el-form
       :model="form"
-      :rules="rules2"
+      :rules="rules"
       ref="form"
       label-position="left"
       label-width="0px"
@@ -31,7 +31,7 @@
           type="primary"
           style="width:100%;"
           v-loading="loading"
-          @click.native.prevent="handleSubmit2('form')"
+          @click.native.prevent="handleSubmit('form')"
         >登录</el-button>
       </el-form-item>
     </el-form>
@@ -55,7 +55,7 @@ export default {
       requireVerify: false,
       verifyUrl: "",
       verifyImg: window.HOST + "admin/base/getVerify",
-      rules2: {
+      rules: {
         username: [{ required: true, message: "请输入账号", trigger: "blur" }],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
         verifyCode: [
@@ -72,10 +72,10 @@ export default {
         this.verifyUrl = this.verifyImg + "?v=" + moment().unix();
       }, 300);
     },
-    handleSubmit2(form) {
+    handleSubmit(form) {
       if (this.loading) return;
-      this.$refs.form.validate(valid => {
-        if (valid) {
+      this.$refs.form.validate(pass => {
+        if (pass) {
           this.loading = !this.loading;
           let data = {};
           if (this.requireVerify) {
@@ -130,7 +130,7 @@ export default {
         this.systemName = data.SYSTEM_NAME;
         if (parseInt(data.IDENTIFYING_CODE)) {
           this.requireVerify = true;
-          this.rules2.verifyCode[0].required = true;
+          this.rules.verifyCode[0].required = true;
         }
       });
     });
@@ -139,7 +139,7 @@ export default {
   mounted() {
     window.addEventListener("keyup", e => {
       if (e.keyCode === 13) {
-        this.handleSubmit2("form");
+        this.handleSubmit("form");
       }
     });
   },

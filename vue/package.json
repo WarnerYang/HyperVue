@@ -1,7 +1,7 @@
 {
-  "name": "vuethink",
+  "name": "hyper_vue",
   "version": "1.0.0",
-  "description": "vueThink made by vue2.0",
+  "description": "",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js"
@@ -64,6 +64,15 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "author": "Honray Inc",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WarnerYang/HyperVue/vue"
+  },
+  "keywords": [
+    "backoffice",
+    "hyperf",
+    "vue"
+  ],
+  "author": "https://github.com/WarnerYang",
+  "license": "MIT"
 }

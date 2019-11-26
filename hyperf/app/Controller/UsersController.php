@@ -6,7 +6,6 @@ namespace App\Controller;
 
 use Hyperf\Di\Annotation\Inject;
 use App\Service\UserService;
-use App\Request\ChangePwdRequest;
 use App\Request\EnablesRequest;
 use App\Request\DeletesRequest;
 use App\Request\UserStoreRequest;
@@ -71,15 +70,6 @@ class UsersController extends AbstractController
         $ids = $this->request->input('ids');
         $status = $this->request->input('status');
         $data = $this->service->enableDatas($ids, $status);
-        return success($data);
-    }
-
-    public function changePwd(ChangePwdRequest $request)
-    {
-        $validated = $request->validated();
-        $oldPwd = $this->request->input('old_pwd');
-        $newPwd = $this->request->input('new_pwd');
-        $data = $this->service->changePwd($oldPwd, $newPwd);
         return success($data);
     }
 }

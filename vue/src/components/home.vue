@@ -57,9 +57,8 @@
 </template>
 
 <script>
-
 import leftMenu from "./common/leftMenu";
-import changePwd from "./users/changePwd";
+import changePwd from "./base/changePwd";
 import http from "../assets/js/http";
 
 export default {
@@ -143,7 +142,6 @@ export default {
     let authKey = Lockr.get("authKey");
     let sessionId = Lockr.get("sessionId");
     if (!authKey || !sessionId) {
-      _g.toastMsg("warning", "您尚未登录");
       setTimeout(() => {
         router.replace("/");
       }, 500);

@@ -69,7 +69,7 @@ class ErrorCode extends AbstractConstants
     const PASSWORD_SAME = 3003;
 
     /**
-     * @Message("原密码错误")
+     * @Message("旧密码错误")
      */
     const OLD_PASSWORD_ERROR= 3004;
 

@@ -3,10 +3,19 @@
     <div class="ovf-auto">
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="旧密码" prop="old_pwd">
-          <el-input type="password" v-model.trim="form.old_pwd" :clearable="true"></el-input>
+          <el-input
+            type="text"
+            v-model.trim="form.old_pwd"
+            :clearable="true"
+          ></el-input>
         </el-form-item>
         <el-form-item label="新密码" prop="new_pwd">
-          <el-input type="password" v-model.trim="form.new_pwd" :clearable="true"></el-input>
+          <el-input
+            type="text"
+            v-model.trim="form.new_pwd"
+            :clearable="true"
+            @keyup.enter.native="submit()"
+          ></el-input>
         </el-form-item>
       </el-form>
     </div>
@@ -24,7 +33,6 @@ export default {
     return {
       disable: false,
       form: {
-        auth_key: "",
         old_pwd: "",
         new_pwd: ""
       },
@@ -52,29 +60,20 @@ export default {
       this.$refs.form.validate(pass => {
         if (pass) {
           this.disable = !this.disable;
-          this.apiPost("admin/users/changePwd", this.form).then(res => {
-            this.handelResponse(
-              res,
-              data => {
-                _g.toastMsg("success", "修改成功");
-                Lockr.rm("authKey");
-                Lockr.rm("authList");
-                Lockr.rm("sessionId");
-                setTimeout(() => {
-                  router.replace("/");
-                }, 500);
-              },
-              () => {
-                this.disable = !this.disable;
-              }
-            );
+          this.apiPost("admin/base/changePwd", this.form).then(res => {
+            this.disable = !this.disable;
+            this.handelResponse(res, data => {
+              _g.toastMsg("success", "修改成功");
+              this.dialogVisible = !this.dialogVisible;
+              Lockr.set("sessionId", data.sessionId); // 更新用户 sessionid
+              Lockr.set("authKey", data.authKey); // 更新权限认证
+              window.axios.defaults.headers.authKey = data.sessionId;
+              window.axios.defaults.headers.sessionId = data.authKey;
+            });
           });
         }
       });
     }
-  },
-  created() {
-    this.form.auth_key = Lockr.get("authKey");
   },
   mixins: [http]
 };

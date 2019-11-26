@@ -71,26 +71,26 @@ const apiMethods = {
       if (res.code) {
         switch (res.code) {
           case 1001:
-            this.relogin();
+            this.relogin(res);
             break
           case 1002:
             break
           case 1003:
-            this.redirectLoginPage();
+            this.redirectLoginPage(res);
             break
           case 1007:
-            this.redirectLoginPage();
+            this.redirectLoginPage(res);
             break
           default:
-            _g.toastMsg('error', res.error || res.message)
+            _g.toastMsg('error', res.message)
         }
       } else {
         console.log('default error')
       }
     },
-    relogin() {
+    relogin(res) {
       console.log('cookie = ', Cookies.get('rememberPwd'))
-      if (!Cookies.get('rememberPwd')) return this.redirectLoginPage()
+      if (!Cookies.get('rememberPwd')) return this.redirectLoginPage(res)
       let data = {
         rememberKey: Lockr.get('rememberKey')
       }
@@ -100,11 +100,9 @@ const apiMethods = {
         })
       })
     },
-    redirectLoginPage() {
-      _g.toastMsg('error', res.error || res.message)
-      setTimeout(() => {
-        router.replace('/')
-      }, 500)
+    redirectLoginPage(res) {
+      _g.toastMsg('error', res.message)
+      router.replace('/')
     },
     resetCommonData(data) {
       _(data.menusList).forEach((res, key) => {

@@ -213,10 +213,12 @@ class UserService extends Service
         if ($isRemember) {
             $loggedInfo['rememberKey'] = encrypt(['username' => $username, 'password' => $password]);
         }
-        
+
         $loggedInfo['menusList'] = $getUserOwnRulesAndMenus['menusList'];
         $loggedInfo['authList'] = $getUserOwnRulesAndMenus['rulesList'];
-        
+
+        unset($loggedInfo['userInfo']['password']);
+
         return $loggedInfo;
     }
 
@@ -227,14 +229,17 @@ class UserService extends Service
      * @param string $newPwd 新密码
      * @return string
      */
-    public function changePwd($oldPwd, $newPwd)
+    public function changePwd($authKey, $oldPwd, $newPwd)
     {
         if ($newPwd === $oldPwd) {
             throw new BusinessException(ErrorCode::PASSWORD_SAME);
         }
 
+        // 获取已登录信息
+        $loggedInfo = $this->getLoggedInfo($authKey);
+        $userInfo = $loggedInfo['userInfo'];
+        
         // 对比原密码
-        $userInfo = Context::get('userInfo');
         if ($userInfo['password'] !== user_md5($oldPwd)) {
             throw new BusinessException(ErrorCode::OLD_PASSWORD_ERROR);
         }
@@ -246,16 +251,13 @@ class UserService extends Service
         }
 
         // 更新用户已登录信息的缓存
-        $userInfo['password'] = user_md5($newPwd);
-        $authKey = $this->getAuthKey($userInfo['id']);
-        $sessionId = unique_id();
-        $loggedInfo = $this->getLoggedInfo($authKey);
-        $loggedInfo['userInfo'] = $userInfo;
-        $loggedInfo['sessionId'] = $sessionId;
+        $loggedInfo['userInfo']['password'] = user_md5($newPwd);
+        $loggedInfo['sessionId'] =  unique_id();
         $this->setLoggedInfo($authKey, $loggedInfo);
 
-        // 返回新的 session
-        return $sessionId;
+        unset($loggedInfo['userInfo']['password']);
+
+        return $loggedInfo;
     }
 
     /**
