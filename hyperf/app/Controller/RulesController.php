@@ -8,6 +8,7 @@ use Hyperf\Di\Annotation\Inject;
 use App\Service\RuleService;
 use App\Request\EnablesRequest;
 use App\Request\DeletesRequest;
+use App\Request\RuleRequest;
 
 class RulesController extends AbstractController
 {
@@ -30,17 +31,17 @@ class RulesController extends AbstractController
         return success($data);
     }
 
-    public function store()
+    public function store(RuleRequest $request)
     {
-        // $validated = $request->validated();
+        $validated = $request->validated();
         $params = $this->request->all();
         $data = $this->service->createData($params);
         return success($data);
     }
 
-    public function update($id)
+    public function update($id, RuleRequest $request)
     {
-        // $validated = $request->validated();
+        $validated = $request->validated();
         $params = $this->request->all();
         $data = $this->service->updateDataById($params, (int) $id);
         return success($data);

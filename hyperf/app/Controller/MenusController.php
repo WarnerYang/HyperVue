@@ -8,6 +8,7 @@ use Hyperf\Di\Annotation\Inject;
 use App\Service\MenuService;
 use App\Request\EnablesRequest;
 use App\Request\DeletesRequest;
+use App\Request\MenuRequest;
 
 class MenusController extends AbstractController
 {
@@ -29,17 +30,17 @@ class MenusController extends AbstractController
         return success($data);
     }
 
-    public function store()
+    public function store(MenuRequest $request)
     {
-        // $validated = $request->validated();
+        $validated = $request->validated();
         $params = $this->request->all();
         $data = $this->service->createData($params);
         return success($data);
     }
 
-    public function update($id)
+    public function update($id, MenuRequest $request)
     {
-        // $validated = $request->validated();
+        $validated = $request->validated();
         $params = $this->request->all();
         $data = $this->service->updateDataById($params, (int) $id);
         return success($data);
