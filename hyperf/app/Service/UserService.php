@@ -169,15 +169,15 @@ class UserService extends Service
     public function login($username, $password, $verifyCode = '', $isRemember = false, $isAutologin = false)
     {
         // 验证码校验
-        if (config('IDENTIFYING_CODE') && !$isAutologin) {
-            if (!$verifyCode) {
-                throw new BusinessException(ErrorCode::VERIFYCODE_REQUIRED);
-            }
-            $captcha = new HonrayVerify(config('captcha'));
-            if (!$captcha->check($verifyCode)) {
-                throw new BusinessException(ErrorCode::VERIFYCODE_ERROR);
-            }
-        }
+        // if (config('IDENTIFYING_CODE') && !$isAutologin) {
+        //     if (!$verifyCode) {
+        //         throw new BusinessException(ErrorCode::VERIFYCODE_REQUIRED);
+        //     }
+        //     $captcha = new HonrayVerify(config('captcha'));
+        //     if (!$captcha->check($verifyCode)) {
+        //         throw new BusinessException(ErrorCode::VERIFYCODE_ERROR);
+        //     }
+        // }
 
         // 用户信息校验
         $userInfo = AdminUser::where('username', $username)->first();

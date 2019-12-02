@@ -70,7 +70,7 @@ class BaseController extends AbstractController
 
     public function getVerify()
     {
-        $captcha = new HonrayVerify(config('captcha'));
-        return $captcha->entry();
+        // $captcha = new HonrayVerify(config('captcha'));
+        // return $captcha->entry();
     }
 }
