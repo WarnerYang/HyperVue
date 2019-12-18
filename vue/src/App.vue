@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <el-collapse-transition>
-      <notFound v-if="isNotFound"></notFound>
-      <router-view></router-view>
-    </el-collapse-transition>
+    <notFound v-if="isNotFound"></notFound>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -16,6 +14,6 @@ export default {
       return !this.$route.matched || this.$route.matched.length === 0;
     }
   },
-  components: {notFound}
+  components: { notFound }
 };
 </script>
