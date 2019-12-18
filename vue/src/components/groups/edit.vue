@@ -111,9 +111,6 @@ export default {
     getGroups() {
       this.apiGet("admin/groups").then(res => {
         this.handelResponse(res, data => {
-          _(data).forEach(ret => {
-            ret.id = ret.id.toString();
-          });
           this.options = this.options.concat(data);
         });
       });
@@ -125,7 +122,7 @@ export default {
       this.apiGet("admin/groups/" + this.form.id).then(res => {
         this.handelResponse(res, data => {
           this.form.title = data.title;
-          this.form.pid = data.pid.toString();
+          this.form.pid = data.pid;
           this.form.remark = data.remark;
           this.form.status = data.status;
           let array = data.rules.split(",");

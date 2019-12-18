@@ -68,9 +68,6 @@ export default {
     getStructures() {
       this.apiGet("admin/structures").then(res => {
         this.handelResponse(res, data => {
-          _(data).forEach(ret => {
-            ret.id = ret.id.toString();
-          });
           this.options = this.options.concat(data);
         });
       });
@@ -81,7 +78,7 @@ export default {
         this.handelResponse(res, data => {
           this.form.id = data.id;
           this.form.name = data.name;
-          this.form.pid = data.pid.toString();
+          this.form.pid = data.pid;
         });
       });
     }
