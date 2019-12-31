@@ -44,9 +44,7 @@
       <el-main class="home-main">
         <section>
           <el-col :span="24" class="bg-wh content-container">
-            <transition name="fade" mode="out-in" appear>
-              <router-view v-loading="showLoading"></router-view>
-            </transition>
+            <router-view v-loading="showLoading"></router-view>
           </el-col>
         </section>
       </el-main>

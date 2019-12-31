@@ -63,28 +63,27 @@ class Category
      */
     private function _searchList($cid = 0, $space = "", $level = 1, $p_name = '')
     {
-        $childs = $this->getChild($cid);
         //下级分类的数组
+        $childs = $this->getChild($cid);
         //如果没下级分类, 结束递归
-        if (!($n = count($childs))) return;
-        $m = 1;
+        $n = count($childs);
+        if (!$n) return;
         //循环所有的下级分类
         for ($i = 0; $i < $n; $i++) {
             $pre = "";
             $pad = "";
-            if ($n == $m) {
+            $pre = $this->icon[1];
+            $pad = $space ? $this->icon[0] : "";
+            if ($n == $i + 1) {
                 $pre = $this->icon[2];
             } else {
-                $pre = $this->icon[1];
-                $pad = $space ? $this->icon[0] : "";
             }
             $childs[$i]['p_title'] = $p_name;
             $childs[$i]['else'] = $childs[$i][$this->fields['name']];
             $childs[$i][$this->fields['fullname']] = ($space ? $space . $pre : "") . $childs[$i][$this->fields['name']];
             $childs[$i]['level'] = $level;
             $this->formatList[] = $childs[$i];
-            $this->_searchList($childs[$i][$this->fields['cid']], $space . $pad . "  ", $level + 1, $childs[$i]['else']); //递归下一级分类
-            $m++;
+            $this->_searchList($childs[$i][$this->fields['cid']], $space . $pad . " ", $level + 1, $childs[$i]['else']); //递归下一级分类
         }
     }
 

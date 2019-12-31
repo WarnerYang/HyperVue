@@ -8,12 +8,12 @@ const commonFn = {
   closeGlobalLoading() {
     setTimeout(() => {
       store.dispatch('showLoading', false)
-    }, 0)
+    })
   },
   openGlobalLoading() {
     setTimeout(() => {
       store.dispatch('showLoading', true)
-    }, 0)
+    })
   },
   cloneJson(obj) {
     return JSON.parse(JSON.stringify(obj))
