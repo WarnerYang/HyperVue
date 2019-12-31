@@ -5,6 +5,9 @@
         <i class="el-icon-plus"></i>&nbsp;&nbsp;添加菜单
       </router-link>
     </div>
+    <div class="pos-rel">
+      <btnGroup :selectedData="multipleSelection" :type="'menus'" :isLastData="isLastData"></btnGroup>
+    </div>
     <el-table :data="tableData" @selection-change="selectItem">
       <el-table-column type="selection" width="50"></el-table-column>
       <!-- <el-table-column prop="p_title" label="父级菜单" width="150"></el-table-column> -->
@@ -21,9 +24,6 @@
         :type="'menus'"
       ></listActions>
     </el-table>
-    <div class="pos-rel p-t-20">
-      <btnGroup :selectedData="multipleSelection" :type="'menus'" :isLastData="isLastData"></btnGroup>
-    </div>
   </div>
 </template>
 

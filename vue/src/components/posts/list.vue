@@ -5,6 +5,9 @@
         <i class="el-icon-plus"></i>&nbsp;&nbsp;添加岗位
       </router-link>
     </div>
+    <div class="pos-rel">
+      <btnGroup :selectedData="multipleSelection" :type="'posts'" :isLastData="isLastData"></btnGroup>
+    </div>
     <el-table :data="tableData" @selection-change="selectItem">
       <el-table-column type="selection" width="50"></el-table-column>
       <el-table-column label="岗位名称" prop="name"></el-table-column>
@@ -17,9 +20,6 @@
         :type="'posts'"
       ></listActions>
     </el-table>
-    <div class="pos-rel p-t-20">
-      <btnGroup :selectedData="multipleSelection" :type="'posts'" :isLastData="isLastData"></btnGroup>
-    </div>
   </div>
 </template>
 

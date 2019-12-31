@@ -9,6 +9,8 @@ a {
 
 .pos-rel {
     position: relative;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #EBEEF5;
 }
 
 .ovf-hd {

@@ -18,6 +18,10 @@
         </el-input>
       </div>
     </div>
+    <div class="pos-rel">
+      <btnGroup :selectedData="multipleSelection" :type="'users'" :isLastData="isLastData"></btnGroup>
+      <pagination ref="pagination" :total="dataCount" class="block pages"></pagination>
+    </div>
     <el-table :data="tableData" @selection-change="selectItem">
       <el-table-column type="selection" width="50"></el-table-column>
       <el-table-column prop="s_name" label="所属组织架构"></el-table-column>
@@ -32,15 +36,14 @@
         :type="'users'"
       ></listActions>
     </el-table>
-    <div class="pos-rel p-t-20">
+    <!-- <div class="pos-rel p-t-20">
       <btnGroup :selectedData="multipleSelection" :type="'users'" :isLastData="isLastData"></btnGroup>
       <pagination ref="pagination" :total="dataCount" class="block pages"></pagination>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-
 import btnGroup from "../common/btnGroup";
 import listStatus from "../common/listStatus";
 import listActions from "../common/listActions";
