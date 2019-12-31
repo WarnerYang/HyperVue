@@ -3,7 +3,7 @@
 // | Author: linchuangbin
 // +----------------------------------------------------------------------
 
-namespace App\Kernel\verify;
+namespace App\Kernel\Verify;
 
 class HonrayVerify
 {
