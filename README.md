@@ -16,11 +16,11 @@ git clone https://github.com/WarnerYang/HyperVue.git
 ```
 
 #### hyperf 部署
-下载并运行 hyperf/hyperf 镜像，并将镜像内的项目目录绑定到宿主机的hyperVue下的hyperf目录（windows用powershell）
 
 ```
+# 下载并运行 hyperf/hyperf 镜像，并将镜像内的项目目录绑定到宿主机的hyperVue下的hyperf目录（windows用powershell）
+# 我的目录是 /Users/yhq/wwwroot/learn/HyperVue/hyperf
 cd hyperf
-pwd 我的目录这里是 /Users/yhq/wwwroot/learn/HyperVue/hyperf
 
 docker run --name hyperVue-hyperf -v /Users/yhq/wwwroot/learn/HyperVue/hyperf:/hyperVue-hyperf -p 9501:9501 -it --entrypoint /bin/sh hyperf/hyperf:7.2-alpine-cli
 
@@ -56,7 +56,8 @@ php bin/hyperf.php start
 #### vue 部署
 ```
 # 下载并运行node镜像，并将镜像内的项目目录绑定到宿主机的hyperVue下的vue目录
-docker run --name hyperVue-vue -v /home/wwwroot/hyperVue/vue:/hyperVue-vue  -it --entrypoint /bin/sh node:latest
+# 我的目录是 /Users/yhq/wwwroot/learn/HyperVue/vue
+docker run --name hyperVue-vue -v /Users/yhq/wwwroot/learn/HyperVue/vue:/hyperVue-vue  -it --entrypoint /bin/sh node:latest
 ```
 以下在容器中运行
 ```
