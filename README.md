@@ -2,8 +2,8 @@
 🚀 基于 Hyperf + Vue + ElementUI 前后端分离的通用型管理后台
 
 - [hyperf 1.1](https://github.com/hyperf/hyperf)
-- [vue 2.0](https://github.com/hyperf/hyperf)
-- [element-ui 2.12](https://github.com/hyperf/hyperf)
+- [vue 2.0](https://github.com/vuejs/vue)
+- [element-ui 2.12](https://github.com/ElemeFE/element)
 
 ## 预览
 ![demo_menu](./doc/img/demo_menu.jpg)
